@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClickHouse parts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="viz-root">
+  <header class="bar">
+    <h1>ClickHouse parts</h1>
+    <label>Table <select id="table"></select></label>
+    <label id="host-wrap" hidden>Host <select id="host"></select></label>
+    <label>Width
+      <select id="mode">
+        <option value="sqrt">Size (sqrt)</option>
+        <option value="log">Size (log)</option>
+        <option value="linear">Size (linear)</option>
+        <option value="blocks">Block range</option>
+        <option value="rows">Rows</option>
+      </select>
+    </label>
+    <label>Sort
+      <select id="sort">
+        <option value="desc">Partition, newest first</option>
+        <option value="asc">Partition, oldest first</option>
+        <option value="parts">Most parts first</option>
+        <option value="bytes">Largest first</option>
+      </select>
+    </label>
+    <label>Filter <input id="filter" type="search" placeholder="partition"></label>
+    <label class="check"><input id="refresh" type="checkbox" checked> Refresh every
+      <select id="interval">
+        <option value="2">2 s</option>
+        <option value="5" selected>5 s</option>
+        <option value="15">15 s</option>
+        <option value="60">60 s</option>
+      </select>
+    </label>
+    <button id="table-toggle" type="button">Table view</button>
+  </header>
+
+  <section class="summary">
+    <div id="stats" class="stats"></div>
+    <div id="legend" class="legend"></div>
+    <div id="notes" class="notes"></div>
+  </section>
+
+  <main id="chart" class="chart">
+    <svg id="svg" role="img" aria-label="Parts by partition"></svg>
+  </main>
+  <section id="table-view" class="table-view" hidden></section>
+
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
